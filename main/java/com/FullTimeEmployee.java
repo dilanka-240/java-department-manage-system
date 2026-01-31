@@ -1,9 +1,10 @@
 package main.java.com;
 
-public class FullTimeEmployee extends Employee {
+public class FullTimeEmployee extends Employee implements Promotable {
 
     double annualBonus;
     String benefits;
+    String newTitle;
 
     public FullTimeEmployee(int id, String name, double baseSalary) {
         super(id, name, baseSalary);
@@ -35,7 +36,22 @@ public class FullTimeEmployee extends Employee {
 
     @Override
     public String getEmployeeInfo() {
-        return "Full Time Employee: " + super.getEmployeeInfo() + "Annual Bonus: " + annualBonus + "Benefits: "
+        return "Full Time Employee: " + super.getEmployeeInfo() + "Title: " + newTitle + "Annual Bonus: " + annualBonus
+                + "Benefits: "
                 + benefits;
+    }
+
+    @Override
+    public void promote(String newTitle) {
+        this.newTitle = newTitle;
+        System.out.println("Employee promoted to " + newTitle);
+    }
+
+    public String getNewTitle() {
+        return newTitle;
+    }
+
+    public void setNewTitle(String newTitle) {
+        this.newTitle = newTitle;
     }
 }
