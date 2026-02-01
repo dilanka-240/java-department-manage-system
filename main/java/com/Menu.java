@@ -6,15 +6,13 @@ public class Menu {
     Scanner scan = new Scanner(System.in);
     Department d;
     Company c;
-    Employee e;
     FullTimeEmployee fe;
     PartTimeEmployee pe;
     Intern i;
 
-    public Menu(Department d, Company c, Employee e, FullTimeEmployee fe, PartTimeEmployee pe, Intern i) {
+    public Menu(Department d, Company c, FullTimeEmployee fe, PartTimeEmployee pe, Intern i) {
         this.d = d;
         this.c = c;
-        this.e = e;
         this.fe = fe;
         this.pe = pe;
         this.i = i;
@@ -30,19 +28,16 @@ public class Menu {
             System.out.println("5. Remove employee");
             System.out.println("6. Add department");
             System.out.println("7. Remove department");
-            System.out.println("8. Exit");
+            System.out.println("8. Give a promote to employee");
+            System.out.println("9. Exit");
             System.out.print("\nEnter your choice: ");
             int choice = scan.nextInt();
 
             switch (choice) {
                 case 1:
-                    System.out.println("Enter department name: ");
-                    d.name = scan.next();
                     d.printAllEmployees();
                     break;
                 case 2:
-                    System.out.println("Enter comapny name: ");
-                    c.companyName = scan.next();
                     c.allDepartmentsInfo();
                     break;
                 case 3:
@@ -59,53 +54,54 @@ public class Menu {
                     switch (ch) {
                         case 1:
                             System.out.println("Enter employee name: ");
-                            e.name = scan.next();
+                            fe.name = scan.next();
                             System.out.println("Enter employee salary: ");
-                            e.baseSalary = scan.nextDouble();
+                            fe.baseSalary = scan.nextDouble();
                             System.out.println("Enter employee bonus: ");
                             fe.annualBonus = scan.nextDouble();
                             System.out.println("Enter employee benefits: ");
                             fe.benefits = scan.next();
-                            d.addEmployee(e);
+                            d.addEmployee(fe);
                             break;
                         case 2:
                             System.out.println("Enter employee name: ");
-                            e.name = scan.next();
+                            pe.name = scan.next();
                             System.out.println("Enter employee salary: ");
-                            e.baseSalary = scan.nextDouble();
+                            pe.baseSalary = scan.nextDouble();
                             System.out.println("Enter employee hourly rate: ");
                             pe.hourlyRate = scan.nextDouble();
                             System.out.println("Enter employee hours worked: ");
                             pe.hoursWorked = scan.nextInt();
-                            d.addEmployee(e);
+                            d.addEmployee(pe);
                             break;
                         case 3:
                             System.out.println("Enter employee name: ");
-                            e.name = scan.next();
+                            i.name = scan.next();
                             System.out.println("Enter employee salary: ");
-                            e.baseSalary = scan.nextDouble();
+                            i.baseSalary = scan.nextDouble();
                             System.out.println("Enter employee mentor name: ");
                             i.mentorName = scan.next();
                             System.out.println("Enter employee duration: ");
                             i.durationInMonths = scan.nextInt();
-                            d.addEmployee(e);
+                            d.addEmployee(i);
                             break;
 
                     }
-                    e.name = scan.next();
-                    System.out.println("Enter employee salary: ");
-                    e.baseSalary = scan.nextDouble();
-                    d.addEmployee(e);
                     break;
                 case 5:
                     System.out.println("Enter employee id: ");
-                    e.id = scan.nextInt();
-                    d.removeEmployee(e.id);
+                    int id = scan.nextInt();
+                    if (id == fe.id) {
+                        d.removeEmployee(fe.id);
+                    } else if (id == pe.id) {
+                        d.removeEmployee(pe.id);
+                    } else if (id == i.id) {
+                        d.removeEmployee(i.id);
+                    }
                     break;
                 case 6:
                     System.out.println("Enter Department name: ");
                     d.name = scan.next();
-                    System.out.println("");
                     c.addDepartment(d);
                     break;
                 case 7:
@@ -114,6 +110,17 @@ public class Menu {
                     c.removeDepartment(d);
                     break;
                 case 8:
+                    System.out.println("Enter employee id: ");
+                    int id2 = scan.nextInt();
+                    if (id2 == fe.id) {
+                        System.out.println("Enter new titel: ");
+                        fe.newTitle = scan.next();
+                        fe.promote(fe.newTitle);
+                    } else {
+                        System.out.println("Employer need to be full time employee");
+                    }
+                    break;
+                case 9:
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;

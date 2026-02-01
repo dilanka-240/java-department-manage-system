@@ -5,6 +5,14 @@ public class Intern extends Employee {
     int durationInMonths;
     String mentorName;
 
+    public Intern() {
+        this.id = 0;
+        this.name = "";
+        this.baseSalary = 0;
+        this.durationInMonths = 0;
+        this.mentorName = "";
+    }
+
     public Intern(int id, String name, double baseSalary, int durationInMonths, String mentorName) {
         super(id, name, baseSalary);
         this.durationInMonths = durationInMonths;

@@ -1,11 +1,17 @@
 package main.java.com;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
 
     String name;
     List<Employee> employees;
+
+    public Department() {
+        this.name = "";
+        this.employees = new ArrayList<>();
+    }
 
     public Department(String name, List<Employee> employees) {
         this.name = name;

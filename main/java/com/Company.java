@@ -1,10 +1,16 @@
 package main.java.com;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Company {
     List<Department> departments;
     String companyName;
+
+    public Company() {
+        this.companyName = "";
+        this.departments = new ArrayList<>();
+    }
 
     public Company(String companyName, List<Department> departments) {
         this.companyName = companyName;

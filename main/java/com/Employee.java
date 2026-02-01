@@ -5,7 +5,13 @@ public abstract class Employee {
     int id;
     double baseSalary;
 
-    Employee(int id, String name, double baseSalary) {
+    public Employee() {
+        this.id = 0;
+        this.name = "";
+        this.baseSalary = 0;
+    }
+
+    public Employee(int id, String name, double baseSalary) {
         this.id = id++;
         this.name = name;
         this.baseSalary = baseSalary;
