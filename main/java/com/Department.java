@@ -1,5 +1,3 @@
-package main.java.com;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +5,6 @@ public class Department {
 
     String name;
     List<Employee> employees;
-    double totalSalary = 0;
 
     public Department() {
         this.name = "";
@@ -44,8 +41,9 @@ public class Department {
     }
 
     public String getDepartmentSalaryTotal() {
+        double totalSalary = 0;
         for (Employee e : employees) {
-            totalSalary = +e.CalculateMonthlyPay();
+            totalSalary += e.CalculateMonthlyPay();
         }
         return "Total Salary: " + totalSalary;
     }

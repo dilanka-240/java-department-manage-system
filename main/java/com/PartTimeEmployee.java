@@ -1,5 +1,3 @@
-package main.java.com;
-
 public class PartTimeEmployee extends Employee {
 
     int hoursWorked;

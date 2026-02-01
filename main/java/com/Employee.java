@@ -1,5 +1,3 @@
-package main.java.com;
-
 public abstract class Employee {
     String name;
     int id;

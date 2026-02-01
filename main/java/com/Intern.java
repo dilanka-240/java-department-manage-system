@@ -1,5 +1,3 @@
-package main.java.com;
-
 public class Intern extends Employee {
 
     int durationInMonths;

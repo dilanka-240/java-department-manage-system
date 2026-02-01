@@ -1,5 +1,3 @@
-package main.java.com;
-
 public class FullTimeEmployee extends Employee implements Promotable {
 
     double annualBonus;

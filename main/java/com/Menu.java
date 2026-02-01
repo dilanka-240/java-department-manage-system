@@ -1,27 +1,18 @@
-package main.java.com;
-
 import java.util.Scanner;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Menu {
     Scanner scan = new Scanner(System.in);
-    Department d;
     Company c;
-    FullTimeEmployee fe;
-    PartTimeEmployee pe;
-    Intern i;
     List<Department> departments;
     List<Employee> employees;
+    int nextId = 1;
 
-    public Menu(Department d, Company c, FullTimeEmployee fe, PartTimeEmployee pe, Intern i,
-            List<Department> department, List<Employee> employees) {
-        this.d = d;
+    public Menu(Company c) {
         this.c = c;
-        this.fe = fe;
-        this.pe = pe;
-        this.i = i;
-        this.departments = department;
-        this.employees = employees;
+        this.departments = c.departments;
+        this.employees = new ArrayList<>();
     }
 
     public void runMenu() {
@@ -38,13 +29,24 @@ public class Menu {
             System.out.println("9. Exit");
             System.out.print("\nEnter your choice: ");
             int choice = scan.nextInt();
+            scan.nextLine(); 
 
             switch (choice) {
                 case 1:
-                    d.printAllEmployees();
+                    if (employees.isEmpty()) {
+                        System.out.println("No employees to display.");
+                    } else {
+                        for (Department d : departments) {
+                            d.printAllEmployees();
+                        }
+                    }
                     break;
                 case 2:
-                    c.allDepartmentsInfo();
+                    if (departments.isEmpty()) {
+                        System.out.println("No departments to display.");
+                    } else {
+                        c.allDepartmentsInfo();
+                    }
                     break;
                 case 3:
                     int ch2;
@@ -58,18 +60,22 @@ public class Menu {
                             System.out.print("\nEnter employee id: ");
                             int id3 = scan.nextInt();
                             scan.nextLine();
-                            if (id3 == fe.id) {
-                                System.out.println("Salary: " + fe.CalculateMonthlyPay());
-                            } else if (id3 == pe.id) {
-                                System.out.println("Salary: " + pe.CalculateMonthlyPay());
-                            } else if (id3 == i.id) {
-                                System.out.println("Salary: " + i.CalculateMonthlyPay());
+                            Employee emp = findEmployeeById(id3);
+                            if (emp != null) {
+                                System.out.println("Salary: " + emp.CalculateMonthlyPay());
+                            } else {
+                                System.out.println("Employee not found");
                             }
                             break;
                         case 2:
                             System.out.print("\nEnter department name: ");
-                            d.name = scan.nextLine();
-                            System.out.println("Total Salary: " + d.getDepartmentSalaryTotal());
+                            String deptName = scan.nextLine();
+                            Department dept = findDepartmentByName(deptName);
+                            if (dept != null) {
+                                System.out.println(dept.getDepartmentSalaryTotal());
+                            } else {
+                                System.out.println("Department not found");
+                            }
                             break;
                         default:
                             System.out.println("Invalid choice");
@@ -85,66 +91,51 @@ public class Menu {
                     System.out.print("\nEnter employee type: ");
                     ch = scan.nextInt();
                     scan.nextLine();
+
+                    System.out.print("\nEnter employee name: ");
+                    String name = scan.nextLine();
+                    System.out.print("\nEnter employee salary: ");
+                    double baseSalary = scan.nextDouble();
+                    scan.nextLine();
+
+                    System.out.print("\nEnter the department of the employee: ");
+                    String departmentName = scan.nextLine();
+                    Department targetDepartment = findDepartmentByName(departmentName);
+                    if (targetDepartment == null) {
+                        System.out.println("Department not found");
+                        break;
+                    }
+
                     switch (ch) {
                         case 1:
-                            System.out.print("\nEnter employee name: ");
-                            String name = scan.nextLine();
-                            System.out.print("\nEnter employee salary: ");
-                            double baseSalary = scan.nextDouble();
                             System.out.print("\nEnter employee bonus: ");
                             double annualBonus = scan.nextDouble();
                             scan.nextLine();
                             System.out.print("\nEnter employee benefits: ");
                             String benefits = scan.nextLine();
-                            FullTimeEmployee fe = new FullTimeEmployee();
-                            fe.name = name;
-                            fe.baseSalary = baseSalary;
-                            fe.annualBonus = annualBonus;
-                            fe.benefits = benefits;
-                            System.out.print("\nEnter the department of the employee: ");
-                            d.name = scan.nextLine();
-                            d.setEmployees(employees);
-                            d.addEmployee(fe);
+                            FullTimeEmployee fe = new FullTimeEmployee(nextId++, name, baseSalary, annualBonus, benefits);
+                            targetDepartment.addEmployee(fe);
+                            employees.add(fe);
                             break;
                         case 2:
-                            System.out.print("\nEnter employee name: ");
-                            String name2 = scan.nextLine();
-                            System.out.print("\nEnter employee salary: ");
-                            double baseSalary2 = scan.nextDouble();
                             System.out.print("\nEnter employee hourly rate: ");
                             double hourlyRate = scan.nextDouble();
                             System.out.print("\nEnter employee hours worked: ");
                             int hoursWorked = scan.nextInt();
                             scan.nextLine();
-                            PartTimeEmployee pe = new PartTimeEmployee();
-                            pe.name = name2;
-                            pe.baseSalary = baseSalary2;
-                            pe.hourlyRate = hourlyRate;
-                            pe.hoursWorked = hoursWorked;
-                            System.out.println("Enter the department of the employee: ");
-                            d.name = scan.nextLine();
-                            d.setEmployees(employees);
-                            d.addEmployee(pe);
+                            PartTimeEmployee pe = new PartTimeEmployee(nextId++, name, baseSalary, hoursWorked, hourlyRate);
+                            targetDepartment.addEmployee(pe);
+                            employees.add(pe);
                             break;
                         case 3:
-                            System.out.print("\nEnter employee name: ");
-                            String name3 = scan.nextLine();
-                            System.out.print("\nEnter employee salary: ");
-                            double baseSalary3 = scan.nextDouble();
                             System.out.print("\nEnter employee mentor name: ");
                             String mentorName = scan.next();
                             System.out.print("\nEnter employee duration: ");
                             int durationInMonths = scan.nextInt();
                             scan.nextLine();
-                            Intern i = new Intern();
-                            i.name = name3;
-                            i.baseSalary = baseSalary3;
-                            i.mentorName = mentorName;
-                            i.durationInMonths = durationInMonths;
-                            System.out.println("Enter the department of the employee: ");
-                            d.name = scan.nextLine();
-                            d.setEmployees(employees);
-                            d.addEmployee(i);
+                            Intern i = new Intern(nextId++, name, baseSalary, durationInMonths, mentorName);
+                            targetDepartment.addEmployee(i);
+                            employees.add(i);
                             break;
                         default:
                             System.out.println("Invalid choice");
@@ -156,44 +147,45 @@ public class Menu {
                     System.out.print("\nEnter employee id: ");
                     int id = scan.nextInt();
                     scan.nextLine();
-                    Employee re = null;
-                    for (Employee e : employees) {
-                        if (e.id == id) {
-                            re = e;
-                            break;
-                        }
-                    }
+                    Employee re = findEmployeeById(id);
+
                     if (re != null) {
-                        employees.remove(id);
+                        for (Department d : departments) {
+                            d.getEmployees().remove(re);
+                        }
+                        employees.remove(re);
                         System.out.println("Employee removed successfully");
                     } else {
                         System.out.println("Employee not found");
                     }
                     break;
                 case 6:
-                    scan.nextLine();
                     System.out.print("\nEnter Department name: ");
-                    String name = scan.nextLine();
-                    Department nd = new Department();
-                    nd.name = name;
+                    String newDeptName = scan.nextLine();
+                    Department nd = new Department(newDeptName, new ArrayList<>());
                     c.addDepartment(nd);
                     break;
                 case 7:
-                    scan.nextLine();
                     System.out.print("\nEnter department name: ");
-                    d.name = scan.nextLine();
-                    c.removeDepartment(d);
+                    String deptNameToRemove = scan.nextLine();
+                    Department deptToRemove = findDepartmentByName(deptNameToRemove);
+                    if (deptToRemove != null) {
+                        c.removeDepartment(deptToRemove);
+                    } else {
+                        System.out.println("Department not found");
+                    }
                     break;
                 case 8:
                     System.out.print("\nEnter employee id: ");
                     int id2 = scan.nextInt();
                     scan.nextLine();
-                    if (id2 == fe.id) {
+                    Employee empToPromote = findEmployeeById(id2);
+                    if (empToPromote instanceof FullTimeEmployee) {
                         System.out.print("Enter new titel: ");
-                        fe.newTitle = scan.nextLine();
-                        fe.promote(fe.newTitle);
+                        String newTitle = scan.nextLine();
+                        ((FullTimeEmployee) empToPromote).promote(newTitle);
                     } else {
-                        System.out.println("Employer need to be full time employee");
+                        System.out.println("Employee need to be full time employee");
                     }
                     break;
                 case 9:
@@ -204,7 +196,24 @@ public class Menu {
                     System.out.println("Invalid choice");
                     break;
             }
-
         }
+    }
+    
+    private Employee findEmployeeById(int id) {
+        for (Employee e : employees) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
+    }
+
+    private Department findDepartmentByName(String name) {
+        for (Department d : departments) {
+            if (d.getName().equalsIgnoreCase(name)) {
+                return d;
+            }
+        }
+        return null;
     }
 }
