@@ -7,6 +7,7 @@ public class Department {
 
     String name;
     List<Employee> employees;
+    double totalSalary = 0;
 
     public Department() {
         this.name = "";
@@ -43,16 +44,15 @@ public class Department {
     }
 
     public String getDepartmentSalaryTotal() {
-        double totalSalary = 0;
         for (Employee e : employees) {
             totalSalary = +e.CalculateMonthlyPay();
         }
-        return "Total Salary of department " + name + "is: " + totalSalary;
+        return "Total Salary: " + totalSalary;
     }
 
     public void printAllEmployees() {
         for (Employee e : employees) {
-            System.out.println("Employee: " + e.getEmployeeInfo());
+            System.out.println(e.getEmployeeInfo());
         }
     }
 

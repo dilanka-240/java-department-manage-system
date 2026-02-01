@@ -42,7 +42,7 @@ public class PartTimeEmployee extends Employee {
 
     @Override
     public String getEmployeeInfo() {
-        return "Part Time Employee: " + super.getEmployeeInfo() + "Hours Worked: " + hoursWorked + "Hourly Rate: "
+        return "Part Time Employee: " + super.getEmployeeInfo() + " Hours Worked: " + hoursWorked + " Hourly Rate: "
                 + hourlyRate;
     }
 

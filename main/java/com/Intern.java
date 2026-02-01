@@ -42,6 +42,6 @@ public class Intern extends Employee {
 
     @Override
     public String getEmployeeInfo() {
-        return "Intern: " + super.getEmployeeInfo() + "Duration: " + durationInMonths + "Mentor: " + mentorName;
+        return "Intern: " + super.getEmployeeInfo() + " Duration: " + durationInMonths + " Mentor: " + mentorName;
     }
 }

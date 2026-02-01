@@ -44,7 +44,7 @@ public abstract class Employee {
     public abstract double CalculateMonthlyPay();
 
     public String getEmployeeInfo() {
-        return "ID: " + id + "Name: " + name + "Salary: " + baseSalary;
+        return "ID: " + id + " Name: " + name + "Salary: " + baseSalary;
     }
 
 }

@@ -44,15 +44,14 @@ public class FullTimeEmployee extends Employee implements Promotable {
 
     @Override
     public String getEmployeeInfo() {
-        return "Full Time Employee: " + super.getEmployeeInfo() + "Title: " + newTitle + "Annual Bonus: " + annualBonus
-                + "Benefits: "
-                + benefits;
+        return "Full Time Employee: " + super.getEmployeeInfo() + " Title: " + newTitle + " Annual Bonus: "
+                + annualBonus + " Benefits: " + benefits;
     }
 
     @Override
     public void promote(String newTitle) {
         this.newTitle = newTitle;
-        System.out.println("Employee promoted to " + newTitle);
+        System.out.println("Employee promoted to: " + newTitle);
     }
 
     public String getNewTitle() {

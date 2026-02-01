@@ -36,7 +36,7 @@ public class Company {
 
     public void allDepartmentsInfo() {
         for (Department d : departments) {
-            System.out.println("Department: " + d.getName() + "\nTotal salary" + d.getDepartmentSalaryTotal());
+            System.out.println("Department: " + d.getName() + " " + d.getDepartmentSalaryTotal());
         }
     }
 
