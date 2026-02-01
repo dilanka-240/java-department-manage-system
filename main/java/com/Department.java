@@ -16,11 +16,19 @@ public class Department {
         this.name = name;
     }
 
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void adddEmployee(Employee e) {
+    public void addEmployee(Employee e) {
         employees.add(e);
     }
 

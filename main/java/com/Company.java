@@ -4,9 +4,20 @@ import java.util.List;
 
 public class Company {
     List<Department> departments;
+    String companyName;
 
-    public Company(List<Department> departments) {
+    public Company(String companyName, List<Department> departments) {
+        this.companyName = companyName;
         this.departments = departments;
+
+    }
+
+    public void setComanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 
     public void addDepartment(Department department) {

@@ -6,7 +6,7 @@ public class FullTimeEmployee extends Employee implements Promotable {
     String benefits;
     String newTitle;
 
-    public FullTimeEmployee(int id, String name, double baseSalary) {
+    public FullTimeEmployee(int id, String name, double baseSalary, double annualBonus, String benefits) {
         super(id, name, baseSalary);
         this.annualBonus = annualBonus;
         this.benefits = benefits;

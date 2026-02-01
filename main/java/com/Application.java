@@ -13,7 +13,7 @@ public class Application {
         Department softwareDept = new Department("Software", employees);
 
         List<Department> departments = new ArrayList<>(Arrays.asList(softwareDept));
-        Company myCompany = new Company(departments);
+        Company myCompany = new Company("MyCompany", departments);
 
         Menu menu = new Menu(softwareDept, myCompany, e1);
 
